@@ -1,3 +1,4 @@
+import os
 from locale import currency
 import numpy as np
 import matplotlib.pyplot as plt
@@ -5,6 +6,10 @@ import pandas as pd
 import yfinance as yf
 import datetime as dt
 from sklearn.preprocessing import MinMaxScaler
+
+# Hide TensorFlow INFO logs in console output.
+os.environ["TF_CPP_MIN_LOG_LEVEL"] = "2"
+
 from tensorflow.keras.layers import Dense, Dropout, LSTM, GRU, RNN, LSTMCell
 from tensorflow.keras.models import Sequential
 
@@ -26,7 +31,13 @@ class Model():
     start = dt.datetime(2016,1,1)
     end = dt.datetime.now()
 
-    data = yf.download(f'{crypto_currency}-{against_currency}', start=start, end=end)
+    data = yf.download(
+        f'{crypto_currency}-{against_currency}',
+        start=start,
+        end=end,
+        auto_adjust=False,
+        progress=False,
+    )
     scaler = MinMaxScaler(feature_range=(0,1))
 
     prediction_days = 30
@@ -48,7 +59,13 @@ class Model():
         if(self.use_online_db):
 
             #self.data = web.DataReader(f'{self.crypto_currency}-{self.against_currency}', self.data_source, self.start, self.end)]
-            self.data = yf.download(f'{self.crypto_currency}-{self.against_currency}', start=self.start, end=self.end)
+            self.data = yf.download(
+                f'{self.crypto_currency}-{self.against_currency}',
+                start=self.start,
+                end=self.end,
+                auto_adjust=False,
+                progress=False,
+            )
 
         else:
 
@@ -104,7 +121,13 @@ class Model():
         """
         test_end    = dt.datetime.now() + dt.timedelta(days=self.future_day)
         #test_data = web.DataReader(f'{self.crypto_currency}-{self.against_currency}', 'yahoo', self.test_start, test_end)
-        test_data = yf.download(f'{self.crypto_currency}-{self.against_currency}', start=self.test_start, end=test_end)
+        test_data = yf.download(
+            f'{self.crypto_currency}-{self.against_currency}',
+            start=self.test_start,
+            end=test_end,
+            auto_adjust=False,
+            progress=False,
+        )
 
 
         actual_prices = test_data['Close'].values
@@ -154,7 +177,13 @@ class Model():
         """
         start_date_gain = dt.datetime.now() - dt.timedelta(days=self.prediction_days)
         #df = web.DataReader(f'{self.crypto_currency}-{self.against_currency}', self.data_source, start_date_gain , dt.datetime.now())
-        df = yf.download(f'{self.crypto_currency}-{self.against_currency}', start=start_date_gain, end=dt.datetime.now())
+        df = yf.download(
+            f'{self.crypto_currency}-{self.against_currency}',
+            start=start_date_gain,
+            end=dt.datetime.now(),
+            auto_adjust=False,
+            progress=False,
+        )
         x =df['Close'].iloc[:1].values
         y =df['Close'].iloc[-1:].values
 
