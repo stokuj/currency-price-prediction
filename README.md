@@ -1,4 +1,4 @@
-# CryptoCurrencyPP
+# Crypto Currency Price Prediction
 
 Desktop application for cryptocurrency price forecasting with recurrent neural networks (LSTM, GRU, and LSTM+GRU).
 
