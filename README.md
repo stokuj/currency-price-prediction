@@ -1,7 +1,7 @@
 # Crypto Currency Price Prediction
 
 Desktop application for cryptocurrency price forecasting with recurrent neural networks (LSTM, GRU, and LSTM+GRU).
-
+This project is educational and should not be treated as trading advice.
 ## Overview
 
 The project uses a Tkinter GUI (MVC structure) to:
@@ -70,19 +70,28 @@ uv run python app.py
 - Chart X-axis now uses concrete calendar dates (`YYYY-MM-DD`).
 - Predicted series is shifted by `Future days`, so each predicted point is plotted at its target date.
 
-## Data Modes
+## Showcase
 
-- Online mode: `Yahoo` is used for crypto downloads. Selecting `Stooq` or `Naver` shows an "unsupported" warning and auto-switches back to `Yahoo`.
-- Offline mode: disable online switch and choose a CSV file.
-  Required column: `Close`.
-  Recommended column for proper timeline: `Date`.
+### GUI
+
+The application features a clean desktop interface built with Tkinter (Azure theme), organized into four panels:
+
+- **Select Currency** — radio buttons to choose between BTC, ETH, Doge, and LTC.
+- **Online Source** — selects the data provider: Yahoo, Stooq, or Naver.
+- **Select Model** — picks the neural network architecture: LSTM, GRU, or LSTM+GRU.
+- **Settings panel** (top-right) — sliders for `Prediction` lookback and data window (`Based on last 30 days`), a toggle to enable/disable the online database, and spinboxes for `Future days` and `Plot range`.
+- **Action buttons** — `Train` starts model training in a background thread, `Plot` renders the forecast chart, `GAIN` computes percent price change, `Select file` loads a local CSV for offline mode, and `HELP` opens documentation.
+
+<img width="506" height="571" alt="GUI_DEMO" src="https://github.com/user-attachments/assets/d0f29ff3-1099-49e8-b2f7-cc3c25a6d892" />
+
+### Prediction Chart
+
+After training, clicking `Plot` opens a Matplotlib chart comparing **Actual Prices** (cyan) against **Predicted Prices** (dark purple) over the selected date range. The predicted series is shifted forward by `Future days`, so each predicted point aligns with its target date. The example below shows a BTC forecast over a 20-day window, where the model closely tracks the sharp price rise from ~84 000 to ~94 000 USD.
+
+<img width="640" height="480" alt="Figure_1" src="https://github.com/user-attachments/assets/7feaf790-c0e9-4dd0-885d-784bcfb7e537" />
 
 ## License
 
 This project is licensed under the MIT License. See `LICENSE`.
-
-## Notes
-
-- If a data source returns empty data, the app shows a user-facing error dialog.
-- This project is educational and should not be treated as trading advice.
+ 
 
