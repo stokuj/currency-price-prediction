@@ -2,6 +2,23 @@
 
 Desktop application for cryptocurrency price forecasting with recurrent neural networks (LSTM, GRU, and LSTM+GRU).
 This project is educational and should not be treated as trading advice.
+
+## Project Structure
+
+```text
+|-- pyproject.toml
+|-- uv.lock
+|-- DATA/download.py       # Utility script for fetching CSV data
+|-- DOC/                   # Report and presentation materials
+|-- app.py                 # Application entry point (Controller)
+|-- app/
+|   |-- model.py           # Data access, training, prediction, gain
+|   |-- view.py            # Tkinter GUI
+|   |-- azure.tcl          # GUI theme
+|   |-- test.csv           # Default local CSV for offline mode
+|   |-- assets/images/
+```
+
 ## Overview
 
 The project uses a Tkinter GUI (MVC structure) to:
@@ -24,25 +41,6 @@ Training runs in a background thread. Progress and ETA are shown in:
 - yfinance + pandas-datareader
 - Tkinter (Azure theme)
 - uv (dependency and environment management)
-
-## Project Structure
-
-```text
-.
-|-- app.py                 # Application entry point (Controller)
-|-- app/
-|   |-- model.py           # Data access, training, prediction, gain
-|   |-- view.py            # Tkinter GUI
-|   |-- azure.tcl          # GUI theme
-|   |-- test.csv           # Default local CSV for offline mode
-|   |-- assets/
-|   `-- images/
-|-- DATA/
-|   `-- download.py        # Utility script for fetching CSV data
-|-- DOC/                   # Report and presentation materials
-|-- pyproject.toml
-`-- uv.lock
-```
 
 ## Quick Start
 
@@ -92,6 +90,6 @@ After training, clicking `Plot` opens a Matplotlib chart comparing **Actual Pric
 
 ## License
 
-This project is licensed under the MIT License. See `LICENSE`.
+This project is available under the MIT License. See [LICENSE](LICENSE).
  
 
